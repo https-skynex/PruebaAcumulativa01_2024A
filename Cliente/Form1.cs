@@ -27,7 +27,7 @@ conexión activa durante la sesión.
 2. Corregir la interpretación del byte en btnConsultar_Click: usar valores decimales 
 en el switch (ej: 32 para Lunes, 16 para Martes) en lugar de representaciones binarias.
 
-************************************************************************ */ 
+************************************************************************ */
 
 using System;
 using System.Linq;
@@ -60,102 +60,54 @@ namespace Cliente
                 MessageBox.Show("No se puedo establecer conexión " + ex.Message,
                     "ERROR");
             }
-            finally 
-            {
-                flujo?.Close();
-                remoto?.Close();
-            }
-
-            panPlaca.Enabled = false;
-            chkLunes.Enabled = false;
-            chkMartes.Enabled = false;
-            chkMiercoles.Enabled = false;
-            chkJueves.Enabled = false;
-            chkViernes.Enabled = false;
-            chkDomingo.Enabled = false;
-            chkSabado.Enabled = false;
         }
 
         private void btnIniciar_Click(object sender, EventArgs e)
         {
-            string usuario = txtUsuario.Text;
-            string contraseña = txtPassword.Text;
-            if (usuario == "" || contraseña == "")
-            {
-                MessageBox.Show("Se requiere el ingreso de usuario y contraseña",
-                    "ADVERTENCIA");
-                return;
-            }
-
-            Pedido pedido = new Pedido
+            var pedido = new Pedido
             {
                 Comando = "INGRESO",
-                Parametros = new[] { usuario, contraseña }
+                Parametros = new[] { txtUsuario.Text, txtPassword.Text }
             };
-            
-            Respuesta respuesta = HazOperacion(pedido);
-            if (respuesta == null)
-            {
-                MessageBox.Show("Hubo un error", "ERROR");
-                return;
-            }
 
-            if (respuesta.Estado == "OK" && respuesta.Mensaje == "ACCESO_CONCEDIDO")
+            Respuesta respuesta = HazOperacion(pedido);
+
+            if (respuesta?.Estado == "OK" && respuesta.Mensaje == "ACCESO_CONCEDIDO")
             {
                 panPlaca.Enabled = true;
                 panLogin.Enabled = false;
-                MessageBox.Show("Acceso concedido", "INFORMACIÓN");
-                txtModelo.Focus();
             }
-            else if (respuesta.Estado == "NOK" && respuesta.Mensaje == "ACCESO_NEGADO")
+            else
             {
-                panPlaca.Enabled = false;
-                panLogin.Enabled = true;
-                MessageBox.Show("No se pudo ingresar, revise credenciales",
-                    "ERROR");
-                txtUsuario.Focus();
+                MessageBox.Show("Acceso denegado", "ERROR");
             }
         }
 
         private Respuesta HazOperacion(Pedido pedido)
         {
-            if(flujo == null)
-            {
-                MessageBox.Show("No hay conexión", "ERROR");
-                return null;
-            }
             try
             {
-                byte[] bufferTx = Encoding.UTF8.GetBytes(
-                    pedido.Comando + " " + string.Join(" ", pedido.Parametros));
-                
+                // Serializar y enviar
+                byte[] bufferTx = Protocolo.Protocolo.SerializarPedido(pedido);
                 flujo.Write(bufferTx, 0, bufferTx.Length);
 
+                // Recibir y deserializar
                 byte[] bufferRx = new byte[1024];
-                
                 int bytesRx = flujo.Read(bufferRx, 0, bufferRx.Length);
-                
-                string mensaje = Encoding.UTF8.GetString(bufferRx, 0, bytesRx);
-                
+                string mensaje = Encoding.UTF8.GetString(bufferRx, 0, bytesRx).Trim();
                 var partes = mensaje.Split(' ');
-                
+
                 return new Respuesta
                 {
                     Estado = partes[0],
                     Mensaje = string.Join(" ", partes.Skip(1).ToArray())
                 };
             }
-            catch (SocketException ex)
+            catch (Exception ex)
             {
-                MessageBox.Show("Error al intentar transmitir " + ex.Message,
-                    "ERROR");
+                MessageBox.Show($"Error: {ex.Message}", "ERROR");
+                return null;
             }
-            finally 
-            {
-                flujo?.Close();
-                remoto?.Close();
-            }
-            return null;
         }
 
         private void btnConsultar_Click(object sender, EventArgs e)
@@ -163,13 +115,13 @@ namespace Cliente
             string modelo = txtModelo.Text;
             string marca = txtMarca.Text;
             string placa = txtPlaca.Text;
-            
+
             Pedido pedido = new Pedido
             {
                 Comando = "CALCULO",
                 Parametros = new[] { modelo, marca, placa }
             };
-            
+
             Respuesta respuesta = HazOperacion(pedido);
             if (respuesta == null)
             {
@@ -194,35 +146,35 @@ namespace Cliente
                 byte resultado = Byte.Parse(partes[1]);
                 switch (resultado)
                 {
-                    case 0b00100000:
+                    case 32: // Lunes (0b00100000)
                         chkLunes.Checked = true;
                         chkMartes.Checked = false;
                         chkMiercoles.Checked = false;
                         chkJueves.Checked = false;
                         chkViernes.Checked = false;
                         break;
-                    case 0b00010000:
+                    case 16: // Martes (0b00010000)
                         chkMartes.Checked = true;
                         chkLunes.Checked = false;
                         chkMiercoles.Checked = false;
                         chkJueves.Checked = false;
                         chkViernes.Checked = false;
                         break;
-                    case 0b00001000:
+                    case 8:  // Miércoles (0b00001000)
                         chkMiercoles.Checked = true;
                         chkLunes.Checked = false;
                         chkMartes.Checked = false;
                         chkJueves.Checked = false;
                         chkViernes.Checked = false;
                         break;
-                    case 0b00000100:
+                    case 4:  // Jueves (0b00000100)
                         chkJueves.Checked = true;
                         chkLunes.Checked = false;
                         chkMartes.Checked = false;
                         chkMiercoles.Checked = false;
                         chkViernes.Checked = false;
                         break;
-                    case 0b00000010:
+                    case 2:  // Viernes (0b00000010)
                         chkViernes.Checked = true;
                         chkLunes.Checked = false;
                         chkMartes.Checked = false;
@@ -242,12 +194,10 @@ namespace Cliente
 
         private void btnNumConsultas_Click(object sender, EventArgs e)
         {
-            String mensaje = "hola";
-            
             Pedido pedido = new Pedido
             {
                 Comando = "CONTADOR",
-                Parametros = new[] { mensaje }
+                Parametros = new string[0] // No necesita parámetros
             };
 
             Respuesta respuesta = HazOperacion(pedido);
@@ -260,23 +210,18 @@ namespace Cliente
             if (respuesta.Estado == "NOK")
             {
                 MessageBox.Show("Error en la solicitud.", "ERROR");
-
             }
             else
             {
-                var partes = respuesta.Mensaje.Split(' ');
-                MessageBox.Show("El número de pedidos recibidos en este cliente es " + partes[0],
+                MessageBox.Show("El número de pedidos recibidos en este cliente es " + respuesta.Mensaje,
                     "INFORMACIÓN");
             }
         }
 
         private void FrmValidador_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (flujo != null)
-                flujo.Close();
-            if (remoto != null)
-                if (remoto.Connected)
-                    remoto.Close();
+            flujo?.Close();
+            remoto?.Close();
         }
     }
 }

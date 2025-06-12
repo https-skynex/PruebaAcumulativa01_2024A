@@ -41,7 +41,7 @@ namespace Servidor
 {
     class Servidor
     {
-        private static TcpListener escuchador;
+        private static TcpListener _escuchador;
         private static Dictionary<string, int> listadoClientes
             = new Dictionary<string, int>();
 
@@ -49,26 +49,25 @@ namespace Servidor
         {
             try
             {
-                escuchador = new TcpListener(IPAddress.Any, 8080);
-                escuchador.Start();
-                Console.WriteLine("Servidor inició en el puerto 5000...");
+                _escuchador = new TcpListener(IPAddress.Any, 8080);
+                _escuchador.Start();
+                Console.WriteLine("Servidor iniciado en puerto 8080...");
 
                 while (true)
                 {
-                    TcpClient cliente = escuchador.AcceptTcpClient();
-                    Console.WriteLine("Cliente conectado, puerto: {0}", cliente.Client.RemoteEndPoint.ToString());
+                    TcpClient cliente = _escuchador.AcceptTcpClient();
+                    Console.WriteLine($"Cliente conectado: {cliente.Client.RemoteEndPoint}");
                     Thread hiloCliente = new Thread(ManipuladorCliente);
                     hiloCliente.Start(cliente);
                 }
             }
             catch (SocketException ex)
             {
-                Console.WriteLine("Error de socket al iniciar el servidor: " +
-                    ex.Message);
+                Console.WriteLine($"Error de socket: {ex.Message}");
             }
-            finally 
+            finally
             {
-                escuchador?.Stop();
+                _escuchador?.Stop();
             }
         }
 
@@ -76,33 +75,29 @@ namespace Servidor
         {
             TcpClient cliente = (TcpClient)obj;
             NetworkStream flujo = null;
+
             try
             {
                 flujo = cliente.GetStream();
-                byte[] bufferTx;
                 byte[] bufferRx = new byte[1024];
                 int bytesRx;
-
                 while ((bytesRx = flujo.Read(bufferRx, 0, bufferRx.Length)) > 0)
                 {
-                    string mensajeRx =
-                        Encoding.UTF8.GetString(bufferRx, 0, bytesRx);
-                    Pedido pedido = Pedido.Procesar(mensajeRx);
-                    Console.WriteLine("Se recibio: " + pedido);
+                    // Usar Protocolo para deserializar y resolver
+                    Pedido pedido =  Protocolo.Protocolo.DeserializarPedido(bufferRx, bytesRx);
+                    Respuesta respuesta = Protocolo.Protocolo.ResolverPedido(
+                        pedido,
+                        cliente.Client.RemoteEndPoint.ToString()
+                    );
 
-                    string direccionCliente =
-                        cliente.Client.RemoteEndPoint.ToString();
-                    Respuesta respuesta = ResolverPedido(pedido, direccionCliente);
-                    Console.WriteLine("Se envió: " + respuesta);
-
-                    bufferTx = Encoding.UTF8.GetBytes(respuesta.ToString());
+                    // Enviar respuesta serializada
+                    byte[] bufferTx = Protocolo.Protocolo.SerializarRespuesta(respuesta);
                     flujo.Write(bufferTx, 0, bufferTx.Length);
                 }
-
             }
-            catch (SocketException ex)
+            catch (Exception ex)
             {
-                Console.WriteLine("Error de socket al manejar el cliente: " + ex.Message);
+                Console.WriteLine($"Error en cliente: {ex.Message}");
             }
             finally
             {
