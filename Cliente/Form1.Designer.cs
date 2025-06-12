@@ -36,6 +36,10 @@ namespace Cliente
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.txtUsuario = new System.Windows.Forms.TextBox();
             this.panPlaca = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtMarca = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtModelo = new System.Windows.Forms.TextBox();
             this.chkSabado = new System.Windows.Forms.CheckBox();
             this.chkViernes = new System.Windows.Forms.CheckBox();
             this.chkJueves = new System.Windows.Forms.CheckBox();
@@ -47,10 +51,6 @@ namespace Cliente
             this.label1 = new System.Windows.Forms.Label();
             this.btnNumConsultas = new System.Windows.Forms.Button();
             this.txtPlaca = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtModelo = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtMarca = new System.Windows.Forms.TextBox();
             this.panLogin.SuspendLayout();
             this.panPlaca.SuspendLayout();
             this.SuspendLayout();
@@ -62,34 +62,38 @@ namespace Cliente
             this.panLogin.Controls.Add(this.btnIniciar);
             this.panLogin.Controls.Add(this.txtPassword);
             this.panLogin.Controls.Add(this.txtUsuario);
-            this.panLogin.Location = new System.Drawing.Point(12, 10);
+            this.panLogin.Location = new System.Drawing.Point(16, 12);
+            this.panLogin.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panLogin.Name = "panLogin";
-            this.panLogin.Size = new System.Drawing.Size(483, 66);
+            this.panLogin.Size = new System.Drawing.Size(644, 81);
             this.panLogin.TabIndex = 6;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(17, 37);
+            this.label3.Location = new System.Drawing.Point(23, 46);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(64, 13);
+            this.label3.Size = new System.Drawing.Size(79, 16);
             this.label3.TabIndex = 9;
             this.label3.Text = "Contraseña:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(17, 15);
+            this.label2.Location = new System.Drawing.Point(23, 18);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(99, 13);
+            this.label2.Size = new System.Drawing.Size(125, 16);
             this.label2.TabIndex = 8;
             this.label2.Text = "Nombre de usuario:";
             // 
             // btnIniciar
             // 
-            this.btnIniciar.Location = new System.Drawing.Point(339, 32);
+            this.btnIniciar.Location = new System.Drawing.Point(452, 39);
+            this.btnIniciar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnIniciar.Name = "btnIniciar";
-            this.btnIniciar.Size = new System.Drawing.Size(105, 23);
+            this.btnIniciar.Size = new System.Drawing.Size(140, 28);
             this.btnIniciar.TabIndex = 7;
             this.btnIniciar.Text = "Iniciar";
             this.btnIniciar.UseVisualStyleBackColor = true;
@@ -97,17 +101,19 @@ namespace Cliente
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(146, 37);
+            this.txtPassword.Location = new System.Drawing.Point(195, 46);
+            this.txtPassword.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(152, 20);
+            this.txtPassword.Size = new System.Drawing.Size(201, 22);
             this.txtPassword.TabIndex = 6;
             this.txtPassword.Text = "admin20";
             // 
             // txtUsuario
             // 
-            this.txtUsuario.Location = new System.Drawing.Point(146, 8);
+            this.txtUsuario.Location = new System.Drawing.Point(195, 10);
+            this.txtUsuario.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtUsuario.Name = "txtUsuario";
-            this.txtUsuario.Size = new System.Drawing.Size(152, 20);
+            this.txtUsuario.Size = new System.Drawing.Size(201, 22);
             this.txtUsuario.TabIndex = 5;
             this.txtUsuario.Text = "root";
             // 
@@ -128,17 +134,55 @@ namespace Cliente
             this.panPlaca.Controls.Add(this.label1);
             this.panPlaca.Controls.Add(this.btnNumConsultas);
             this.panPlaca.Controls.Add(this.txtPlaca);
-            this.panPlaca.Location = new System.Drawing.Point(15, 96);
+            this.panPlaca.Location = new System.Drawing.Point(20, 118);
+            this.panPlaca.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panPlaca.Name = "panPlaca";
-            this.panPlaca.Size = new System.Drawing.Size(480, 153);
+            this.panPlaca.Size = new System.Drawing.Size(640, 188);
             this.panPlaca.TabIndex = 8;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(335, 22);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(48, 16);
+            this.label5.TabIndex = 22;
+            this.label5.Text = "Marca:";
+            // 
+            // txtMarca
+            // 
+            this.txtMarca.Location = new System.Drawing.Point(427, 18);
+            this.txtMarca.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtMarca.Name = "txtMarca";
+            this.txtMarca.Size = new System.Drawing.Size(181, 22);
+            this.txtMarca.TabIndex = 21;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(19, 18);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(56, 16);
+            this.label4.TabIndex = 20;
+            this.label4.Text = "Modelo:";
+            // 
+            // txtModelo
+            // 
+            this.txtModelo.Location = new System.Drawing.Point(144, 15);
+            this.txtModelo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtModelo.Name = "txtModelo";
+            this.txtModelo.Size = new System.Drawing.Size(179, 22);
+            this.txtModelo.TabIndex = 19;
             // 
             // chkSabado
             // 
             this.chkSabado.AutoSize = true;
-            this.chkSabado.Location = new System.Drawing.Point(394, 83);
+            this.chkSabado.Location = new System.Drawing.Point(525, 102);
+            this.chkSabado.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkSabado.Name = "chkSabado";
-            this.chkSabado.Size = new System.Drawing.Size(63, 17);
+            this.chkSabado.Size = new System.Drawing.Size(78, 20);
             this.chkSabado.TabIndex = 18;
             this.chkSabado.Text = "Sábado";
             this.chkSabado.UseVisualStyleBackColor = true;
@@ -146,9 +190,10 @@ namespace Cliente
             // chkViernes
             // 
             this.chkViernes.AutoSize = true;
-            this.chkViernes.Location = new System.Drawing.Point(336, 83);
+            this.chkViernes.Location = new System.Drawing.Point(448, 102);
+            this.chkViernes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkViernes.Name = "chkViernes";
-            this.chkViernes.Size = new System.Drawing.Size(61, 17);
+            this.chkViernes.Size = new System.Drawing.Size(75, 20);
             this.chkViernes.TabIndex = 17;
             this.chkViernes.Text = "Viernes";
             this.chkViernes.UseVisualStyleBackColor = true;
@@ -156,9 +201,10 @@ namespace Cliente
             // chkJueves
             // 
             this.chkJueves.AutoSize = true;
-            this.chkJueves.Location = new System.Drawing.Point(280, 83);
+            this.chkJueves.Location = new System.Drawing.Point(373, 102);
+            this.chkJueves.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkJueves.Name = "chkJueves";
-            this.chkJueves.Size = new System.Drawing.Size(60, 17);
+            this.chkJueves.Size = new System.Drawing.Size(73, 20);
             this.chkJueves.TabIndex = 16;
             this.chkJueves.Text = "Jueves";
             this.chkJueves.UseVisualStyleBackColor = true;
@@ -166,9 +212,10 @@ namespace Cliente
             // chkMiercoles
             // 
             this.chkMiercoles.AutoSize = true;
-            this.chkMiercoles.Location = new System.Drawing.Point(211, 83);
+            this.chkMiercoles.Location = new System.Drawing.Point(281, 102);
+            this.chkMiercoles.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkMiercoles.Name = "chkMiercoles";
-            this.chkMiercoles.Size = new System.Drawing.Size(71, 17);
+            this.chkMiercoles.Size = new System.Drawing.Size(88, 20);
             this.chkMiercoles.TabIndex = 15;
             this.chkMiercoles.Text = "Miércoles";
             this.chkMiercoles.UseVisualStyleBackColor = true;
@@ -176,9 +223,10 @@ namespace Cliente
             // chkMartes
             // 
             this.chkMartes.AutoSize = true;
-            this.chkMartes.Location = new System.Drawing.Point(151, 83);
+            this.chkMartes.Location = new System.Drawing.Point(201, 102);
+            this.chkMartes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkMartes.Name = "chkMartes";
-            this.chkMartes.Size = new System.Drawing.Size(58, 17);
+            this.chkMartes.Size = new System.Drawing.Size(70, 20);
             this.chkMartes.TabIndex = 14;
             this.chkMartes.Text = "Martes";
             this.chkMartes.UseVisualStyleBackColor = true;
@@ -186,9 +234,10 @@ namespace Cliente
             // chkDomingo
             // 
             this.chkDomingo.AutoSize = true;
-            this.chkDomingo.Location = new System.Drawing.Point(23, 83);
+            this.chkDomingo.Location = new System.Drawing.Point(31, 102);
+            this.chkDomingo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkDomingo.Name = "chkDomingo";
-            this.chkDomingo.Size = new System.Drawing.Size(68, 17);
+            this.chkDomingo.Size = new System.Drawing.Size(84, 20);
             this.chkDomingo.TabIndex = 13;
             this.chkDomingo.Text = "Domingo";
             this.chkDomingo.UseVisualStyleBackColor = true;
@@ -196,18 +245,20 @@ namespace Cliente
             // chkLunes
             // 
             this.chkLunes.AutoSize = true;
-            this.chkLunes.Location = new System.Drawing.Point(91, 83);
+            this.chkLunes.Location = new System.Drawing.Point(121, 102);
+            this.chkLunes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.chkLunes.Name = "chkLunes";
-            this.chkLunes.Size = new System.Drawing.Size(55, 17);
+            this.chkLunes.Size = new System.Drawing.Size(65, 20);
             this.chkLunes.TabIndex = 12;
             this.chkLunes.Text = "Lunes";
             this.chkLunes.UseVisualStyleBackColor = true;
             // 
             // btnConsultar
             // 
-            this.btnConsultar.Location = new System.Drawing.Point(336, 44);
+            this.btnConsultar.Location = new System.Drawing.Point(449, 54);
+            this.btnConsultar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnConsultar.Name = "btnConsultar";
-            this.btnConsultar.Size = new System.Drawing.Size(105, 23);
+            this.btnConsultar.Size = new System.Drawing.Size(140, 28);
             this.btnConsultar.TabIndex = 11;
             this.btnConsultar.Text = "Consultar";
             this.btnConsultar.UseVisualStyleBackColor = true;
@@ -216,17 +267,19 @@ namespace Cliente
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 47);
+            this.label1.Location = new System.Drawing.Point(19, 58);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(37, 13);
+            this.label1.Size = new System.Drawing.Size(45, 16);
             this.label1.TabIndex = 10;
             this.label1.Text = "Placa:";
             // 
             // btnNumConsultas
             // 
-            this.btnNumConsultas.Location = new System.Drawing.Point(170, 117);
+            this.btnNumConsultas.Location = new System.Drawing.Point(227, 144);
+            this.btnNumConsultas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnNumConsultas.Name = "btnNumConsultas";
-            this.btnNumConsultas.Size = new System.Drawing.Size(170, 23);
+            this.btnNumConsultas.Size = new System.Drawing.Size(227, 28);
             this.btnNumConsultas.TabIndex = 9;
             this.btnNumConsultas.Text = "Número de consultas";
             this.btnNumConsultas.UseVisualStyleBackColor = true;
@@ -234,50 +287,20 @@ namespace Cliente
             // 
             // txtPlaca
             // 
-            this.txtPlaca.Location = new System.Drawing.Point(108, 44);
+            this.txtPlaca.Location = new System.Drawing.Point(144, 54);
+            this.txtPlaca.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.txtPlaca.Name = "txtPlaca";
-            this.txtPlaca.Size = new System.Drawing.Size(135, 20);
+            this.txtPlaca.Size = new System.Drawing.Size(179, 22);
             this.txtPlaca.TabIndex = 8;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(14, 15);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(45, 13);
-            this.label4.TabIndex = 20;
-            this.label4.Text = "Modelo:";
-            // 
-            // txtModelo
-            // 
-            this.txtModelo.Location = new System.Drawing.Point(108, 12);
-            this.txtModelo.Name = "txtModelo";
-            this.txtModelo.Size = new System.Drawing.Size(135, 20);
-            this.txtModelo.TabIndex = 19;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(251, 18);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(40, 13);
-            this.label5.TabIndex = 22;
-            this.label5.Text = "Marca:";
-            // 
-            // txtMarca
-            // 
-            this.txtMarca.Location = new System.Drawing.Point(320, 15);
-            this.txtMarca.Name = "txtMarca";
-            this.txtMarca.Size = new System.Drawing.Size(137, 20);
-            this.txtMarca.TabIndex = 21;
             // 
             // FrmValidador
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(507, 258);
+            this.ClientSize = new System.Drawing.Size(676, 318);
             this.Controls.Add(this.panPlaca);
             this.Controls.Add(this.panLogin);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FrmValidador";
             this.Text = "Hoy no Circula";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmValidador_FormClosing);

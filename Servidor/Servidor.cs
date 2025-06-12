@@ -1,4 +1,34 @@
-﻿using System;
+﻿/* ************************************************************************
+                                Practica 07
+Integrantes: Kevin Perez  
+Fecha de realización: 11/06/2025  
+Fecha de entrega: 18/06/2025  
+
+RESULTADOS:  
+Con credenciales válidas (root/admin20), el servidor rechaza al cliente el 
+50% de las veces con NOK ACCESO_NEGADO, causando confusión. Tras validar dos 
+placas (ABC1234 y XYZ5678) desde una misma IP, el comando CONTADOR devuelve 
+OK 2, demostrando que el registro funciona, pero con riesgo de corrupción 
+por hilos simultáneos.
+
+CONCLUSIONES:  
+1. El servidor maneja correctamente múltiples conexiones simultáneas mediante hilos,
+garantizando escalabilidad. No obstante, presenta dos fallas críticas: la aleatoriedad 
+en la concesión de acceso (50% de rechazo incluso con credenciales válidas) contradice 
+la lógica de autenticación esperada, 
+2. El uso de un Dictionary no sincronizado para el conteo de solicitudes genera 
+condiciones de carrera en entornos multihilo, lo que puede corromper datos 
+o causar excepciones no controladas.
+
+RECOMENDACIONES:  
+1. Sustituir el Dictionary por un ConcurrentDictionary para garantizar acceso
+seguro en hilos concurrentes sin condiciones de carrera. 
+2. Eliminar la lógica aleatoria en el comando INGRESO: el acceso debe concederse 
+siempre con credenciales válidas para mantener consistencia.
+
+************************************************************************ */
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
